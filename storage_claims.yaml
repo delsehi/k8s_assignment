@@ -1,0 +1,47 @@
+apiVersion: v1
+kind: PersistentVolume
+metadata:
+  name: mariadb-pv
+spec:
+  capacity:
+    storage: 10Gi
+  accessModes:
+     - ReadWriteMany
+  nfs:
+    server: 172.16.0.14
+    path: /nfs/mariadb/kubedata
+---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+        name: mariadb-pvc
+spec:
+        accessModes:
+                - ReadWriteMany
+        resources:
+                requests:
+                        storage: 10Gi
+---
+apiVersion: v1
+kind: PersistentVolume
+metadata:
+  name: mongo-pv
+spec:
+  capacity:
+    storage: 10Gi
+  accessModes:
+     - ReadWriteMany
+  nfs:
+    server: 172.16.0.14
+    path: /nfs/mongodb/kubedata
+---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+        name: mongo-pvc
+spec:
+        accessModes:
+                - ReadWriteMany
+        resources:
+                requests:
+                        storage: 10Gi
