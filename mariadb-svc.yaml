@@ -3,15 +3,10 @@ kind: ConfigMap
 metadata:
   name: mariadb-config
 data:
-  MARIADB_SERVER_ADDR: 'mariadb.default.svc.cluster.local'
-  MARIADB_SERVER_PORT: '3306'
-  MARIADB_DB_USER: 'BidenTrump'
-  MARIADB_DB_PASSWORD: 'Election2020'
-  MARIADB_DB_NAME: 'Delfi'
   MYSQL_ROOT_PASSWORD: 'Slime'
   MYSQL_USER: 'BidenBiden'
   MYSQL_PASSWORD: 'Trump'
-  MYSQL_DATABASE: 'Wow'
+  MYSQL_DATABASE: 'maria-database'
 ---
 apiVersion: apps/v1
 kind: Deployment
@@ -33,6 +28,13 @@ spec:
           envFrom:
             - configMapRef:
                 name: mariadb-config
+          volumeMounts:
+            - name: hello
+              mountPath: "/var/lib/mysql"
+      volumes:
+        - name: hello
+          persistentVolumeClaim:
+            claimName: mariadb-pvc
 ---
 apiVersion: v1
 kind: Service

@@ -4,7 +4,7 @@ metadata:
   name: mariadb-pv
 spec:
   capacity:
-    storage: 10Gi
+    storage: 11Gi
   accessModes:
      - ReadWriteMany
   nfs:
@@ -14,13 +14,13 @@ spec:
 apiVersion: v1
 kind: PersistentVolumeClaim
 metadata:
-        name: mariadb-pvc
+  name: mariadb-pvc
 spec:
-        accessModes:
-                - ReadWriteMany
-        resources:
-                requests:
-                        storage: 10Gi
+  accessModes:
+    - ReadWriteMany
+  resources:
+    requests:
+      storage: 10Gi
 ---
 apiVersion: v1
 kind: PersistentVolume
@@ -28,7 +28,7 @@ metadata:
   name: mongo-pv
 spec:
   capacity:
-    storage: 10Gi
+    storage: 15Gi
   accessModes:
      - ReadWriteMany
   nfs:
@@ -38,10 +38,10 @@ spec:
 apiVersion: v1
 kind: PersistentVolumeClaim
 metadata:
-        name: mongo-pvc
+  name: mongo-pvc
 spec:
-        accessModes:
-                - ReadWriteMany
-        resources:
-                requests:
-                        storage: 10Gi
+  accessModes:
+    - ReadWriteMany
+  resources:
+    requests:
+      storage: 11Gi

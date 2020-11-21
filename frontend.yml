@@ -1,0 +1,32 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: frontconf
+data:
+  LOGIN_SERVER_ADDR: '10.107.225.231'
+  LOGIN_SERVER_PORT: '7070'
+  POST_SERVER_ADDR: '10.106.251.137'
+  POST_SERVER_PORT: '7075'
+  FRONTEND_SERVER_ADDR: '10.104.16.191'
+  FRONTEND_SERVER_PORT: '7080'
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: frontend
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: frontend
+  template:
+    metadata:
+      labels:
+        app: frontend
+    spec:
+      containers:
+        - name: frontend
+          image: 172.16.0.5:5000/frontend
+          envFrom:
+            - configMapRef:
+                name: frontconf
